@@ -12,7 +12,7 @@ Add this line to your application's Gemfile:
 gem 'betterdoc-containerservice', git: 'https://github.com/betterdoc-org/general-gem-betterdoc-containerservice'
 ```
 
-And to make sure the dependencies are resolved correctly, add to your `application.rb` file:
+And to make sure the dependencies are resolved correctly, add to your Rails `config/application.rb` file:
 
 ```ruby
 require "betterdoc/containerservice/railtie"
@@ -30,7 +30,7 @@ Use the [Logging](https://github.com/TwP/logging) framework (incl. its [Railtie]
 
 #### Authentication
 
-**All** controller invocations require a valid JSON Web Token (JWT) either as HTTP header `Authoriaztion` in the format `Authorization: Bearer 1234567890ABCEEF` or as HTTP parameter `_jwt` in the format `1234567890ABCDEF`.
+**All** controller are enhanced to require a valid JSON Web Token (JWT) on each invocation either as HTTP header `Authoriaztion` in the format `Authorization: Bearer 1234567890ABCEEF` or as HTTP parameter `_jwt` in the format `1234567890ABCDEF`.
 
 #### Rendering shortcuts
 
