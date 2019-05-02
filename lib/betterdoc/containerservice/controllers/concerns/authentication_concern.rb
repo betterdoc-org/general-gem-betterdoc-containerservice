@@ -1,3 +1,5 @@
+require 'jwt'
+
 module Betterdoc
   module Containerservice
     module Controllers
