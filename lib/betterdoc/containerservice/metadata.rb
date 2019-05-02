@@ -43,4 +43,3 @@ module Betterdoc
     end
   end
 end
-

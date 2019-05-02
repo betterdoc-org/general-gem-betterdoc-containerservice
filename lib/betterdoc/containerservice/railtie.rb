@@ -2,8 +2,6 @@ module Betterdoc
   module Containerservice
     class Railtie < Rails::Railtie
 
-      require_relative 'logging/logging'
-
       initializer 'betterdoc.containerservice.autoload', before: :set_autoload_paths do |app|
         # Ensure that *all* the classes from the gem are visible throughout Rails
         app.config.autoload_paths += Dir["#{File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))}/**/"]
