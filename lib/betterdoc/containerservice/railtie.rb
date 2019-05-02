@@ -1,3 +1,7 @@
+require "logging"
+require "logging-rails"
+require "lograge"
+
 module Betterdoc
   module Containerservice
     class Railtie < Rails::Railtie

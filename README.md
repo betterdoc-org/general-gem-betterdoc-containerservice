@@ -10,10 +10,12 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'betterdoc-containerservice', git: 'https://github.com/betterdoc-org/general-gem-betterdoc-containerservice'
-gem 'jwt', '~> 2.1.0'
-gem 'logging', '~> 2.2.2'
-gem 'logging-rails', '~> 0.6.0'
-gem 'lograge', '~> 0.10.0'
+```
+
+And to make sure the dependencies are resolved correctly, add to your `application.rb` file:
+
+```ruby
+require "betterdoc/containerservice/railtie"
 ```
 
 ## Functionalities
