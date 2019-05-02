@@ -1,3 +1,5 @@
+require 'logging'
+
 module Betterdoc
   module Containerservice
     module Logging

@@ -1,3 +1,5 @@
+require 'logging'
+
 Logging::Rails.configure do |config|
 
   # Configure the Logging framework with the default log levels
