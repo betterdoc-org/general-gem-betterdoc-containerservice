@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'logging', '~> 2.2.2'
   spec.add_dependency 'logging-rails', '~> 0.6.0'
   spec.add_dependency 'lograge', '~> 0.10.0'
+  spec.add_dependency 'pg', '~> 1.1.4'
   spec.add_dependency 'rails', '~> 5.2.3'
   spec.add_development_dependency 'rubocop', '~> 0.67.2'
   spec.add_development_dependency 'rubocop-junit-formatter', '~> 0.1.4'
