@@ -30,7 +30,7 @@ class HttpHelpersConcernTest < ActiveSupport::TestCase
 
     concern = Object.new
     concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
-    concern.stubs(:params).returns({ full_html: 'true' })
+    concern.stubs(:params).returns(full_html: 'true')
     concern.expects(:render).with { |value| value[:template] == 'template' && value[:layout] == true }
 
     concern.render_containerservice_template('template')
