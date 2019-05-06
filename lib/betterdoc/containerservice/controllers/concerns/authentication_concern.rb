@@ -1,3 +1,4 @@
+require 'openssl'
 require 'jwt'
 
 module Betterdoc
@@ -14,27 +15,39 @@ module Betterdoc
           end
 
           def extract_authentication_token
-            if request.params.key?('_jwt')
+            if request.respond_to?(:params) && request.params.key?('_jwt')
               request.params['_jwt']
-            elsif !request.headers['Authorization']
-              ''
-            else
+            elsif request.respond_to?(:headers) && request.headers['Authorization']
               request.headers['Authorization'].split(' ').last
+            else
+              ''
             end
           end
 
           def authenticate_service_from_token
-            return if ENV['JWT_VALIDATION_ENABLED'] == 'false'
+            return unless compute_jwt_validation_enabled
 
             token = extract_authentication_token
             raise AuthenticationConcern::MissingTokenError if token.blank?
 
             begin
-              public_key = OpenSSL::PKey::RSA.new(ENV['JWT_PUBLIC_KEY'])
-              JWT.decode(token, public_key, true, algorithm: (ENV['JWT_VALIDATION_ALGORITHM'] || 'RS256'))
+              public_key = OpenSSL::PKey::RSA.new(compute_jwt_public_key)
+              JWT.decode(token, public_key, true, algorithm: compute_jwt_validation_algorithm)
             rescue StandardError
               raise AuthenticationConcern::InvalidTokenError
             end
+          end
+
+          def compute_jwt_validation_enabled
+            ENV['JWT_VALIDATION_ENABLED'] != 'false'
+          end
+
+          def compute_jwt_public_key
+            ENV['JWT_PUBLIC_KEY']
+          end
+
+          def compute_jwt_validation_algorithm
+            ENV['JWT_VALIDATION_ALGORITHM'] || 'RS256'
           end
 
           def rescue_from_missing_token

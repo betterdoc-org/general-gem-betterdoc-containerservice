@@ -1,3 +1,5 @@
+require 'betterdoc/containerservice/metadata'
+
 module Betterdoc
   module Containerservice
     module Controllers
