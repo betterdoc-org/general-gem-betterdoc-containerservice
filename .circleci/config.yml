@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  recipe: "betterdoc/recipes-ruby@dev:NEXT"
+  recipe: "betterdoc/recipes-ruby@3"
 
 workflows:
   version: 2
