@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'lograge', '~> 0.10.0'
   spec.add_dependency 'pg', '~> 1.1.4'
   spec.add_dependency 'rails', '~> 5.2.3'
-  spec.add_development_dependency 'minitest', '~> 5.11.3'
   spec.add_development_dependency 'minitest-ci', '~> 3.4.0'
   spec.add_development_dependency 'mocha', '~> 1.8.0'
   spec.add_development_dependency 'rubocop', '~> 0.68.1'

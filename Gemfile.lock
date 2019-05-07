@@ -164,7 +164,6 @@ PLATFORMS
 
 DEPENDENCIES
   betterdoc-containerservice!
-  minitest (~> 5.11.3)
   minitest-ci (~> 3.4.0)
   mocha (~> 1.8.0)
   rubocop (~> 0.68.1)
