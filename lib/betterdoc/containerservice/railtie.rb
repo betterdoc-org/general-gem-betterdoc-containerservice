@@ -26,7 +26,7 @@ module Betterdoc
 
         # By default we don't want to have the SQL statements written in the logfiles as they might leak sensitive
         # information (like patient data, etc.)
-        ::ActiveRecord::Base.logger.level = Logger::INFO
+        ActiveRecord::Base.logger.level = Logger::INFO if defined?(ActiveRecord)
 
       end
 
