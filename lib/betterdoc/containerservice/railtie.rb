@@ -24,6 +24,10 @@ module Betterdoc
         # the Rack stack that reads the "request_id" and makes it availble to the Logging MDC
         app.config.middleware.insert_after ActionDispatch::RequestId, Betterdoc::Containerservice::Logging::StoreRequestIdIntoLoggingMdcMiddleware
 
+        # By default we don't want to have the SQL statements written in the logfiles as they might leak sensitive
+        # information (like patient data, etc.)
+        ActiveRecord::Base.logger.level = Logger::INFO
+
       end
 
       initializer 'betterdoc.containerservice.initialization' do
