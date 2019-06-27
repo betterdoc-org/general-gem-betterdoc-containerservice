@@ -32,13 +32,18 @@ module Betterdoc
 
       initializer 'betterdoc.containerservice.initialization' do
 
-        # Make sure all our internal constraints are added to ActionController::Base
+        # Make sure all our concerns are added to ActionController::Base
         # This way we ensure that all controllers require authentication via JWT, set the default headers expected
         # by Stacker and support some general functionality that makes our life a little easier
         class ActionController::Base
           include Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern
           include Betterdoc::Containerservice::Controllers::Concerns::HttpResponseMetadataConcern
           include Betterdoc::Containerservice::Controllers::Concerns::AuthenticationConcern
+        end
+
+        # Make sure that all our *helpers* are made available to the template evaluation engine
+        class ActionView::Base
+          include Betterdoc::Containerservice::Helpers::LinkHelper
         end
 
       end
