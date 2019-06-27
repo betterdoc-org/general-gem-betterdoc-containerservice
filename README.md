@@ -104,7 +104,7 @@ So all that needs to be done wither within a template is to call the helper func
 
 ```html
 <div>
-    <%= create_stacker_link('another/stack/location') %>
+    <a href="<%= create_stacker_link('another/stack/location') %>">Go to other location</a>
 </div>
 ```
 
@@ -114,7 +114,7 @@ Parameters can also be passed to the `create_stacker_link` function:
 
 ```html
 <div>
-    <%= create_stacker_link('another/stack/location', 'aKey' => 'aValue', 'bKey' => 'bValue') %>
+    <a href="<%= create_stacker_link('another/stack/location', 'aKey' => 'aValue', 'bKey' => 'bValue') %>">Go to other location</a>
 </div>
 ```
 
