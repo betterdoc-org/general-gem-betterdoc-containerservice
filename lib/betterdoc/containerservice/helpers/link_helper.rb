@@ -6,17 +6,10 @@ module Betterdoc
       module LinkHelper
         extend ActiveSupport::Concern
 
-        # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
         def create_stacker_link(target_path, parameters = {})
 
-          base_url_from_request = resolve_stacker_base_url_from_request
-          base_url_from_environment = resolve_stacker_base_url_from_environment
-          base_url = base_url_from_request if base_url_from_request.present?
-          base_url = base_url_from_environment if base_url.blank? && base_url_from_environment.present?
-          base_url = '/' if base_url.blank?
-
-          result_url = base_url.dup
-          result_url << '/' unless base_url.end_with?('/') || target_path.start_with?('/')
+          result_url = resolve_stacker_base_url.dup
+          result_url << '/' unless result_url.end_with?('/') || target_path.start_with?('/')
           result_url << target_path unless result_url.end_with?('/') && target_path.start_with?('/')
           result_url << target_path[1, target_path.length] if result_url.end_with?('/') && target_path.start_with?('/')
 
@@ -27,9 +20,12 @@ module Betterdoc
           result_url
 
         end
-        # rubocop:enable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
 
         private
+
+        def resolve_stacker_base_url
+          resolve_stacker_base_url_from_request.presence || resolve_stacker_base_url_from_environment || "/"
+        end
 
         def resolve_stacker_base_url_from_request
           request.headers['HTTP_X-STACKER-ROOT-URL']
