@@ -19,7 +19,7 @@ module Betterdoc
         private
 
         def resolve_stacker_base_url
-          resolve_stacker_base_url_from_request.presence || resolve_stacker_base_url_from_environment || "/"
+          resolve_stacker_base_url_from_request.presence || resolve_stacker_base_url_from_environment.presence || "/"
         end
 
         def resolve_stacker_base_url_from_request

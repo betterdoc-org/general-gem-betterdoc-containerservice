@@ -82,6 +82,33 @@ class LinkHelperTest < ActiveSupport::TestCase
 
   end
 
+  test "stacker link url with default root url due to empty header value" do
+
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => '')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal '/stacks/abc?aKey=aValue&bKey=bValue', concern.stacker_link_url('stacks/abc', 'aKey' => 'aValue', 'bKey' => 'bValue')
+
+  end
+
+  test "stacker link url with default root url due to empty environment value" do
+
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns({})
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.stubs(:resolve_stacker_base_url_from_environment).returns('')
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal '/stacks/abc?aKey=aValue&bKey=bValue', concern.stacker_link_url('stacks/abc', 'aKey' => 'aValue', 'bKey' => 'bValue')
+
+  end
+
   test "stacker link url with default root url and parameters" do
 
     mocked_request = Object.new
