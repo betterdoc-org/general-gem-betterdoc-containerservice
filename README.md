@@ -80,6 +80,58 @@ Renders the template specified under `:template_name`.
 Only if either the HTTP parameter `full_html` is set to `true` for the current request or an environment variable named `CONTAINERSERVICE_FULL_HTML` is set to `true` will the layout be applied to the template. 
 Otherwise (the default case) only the plain template will be rendered and returned to the client.
 
+### Helpers
+
+#### URL and link generation
+
+When the content of the container service is rendered inside a Stack (composed by Stacker) the following helper functionality is available to create a link to another Stack with the same Stacker instance.
+
+Let's take an example:
+
+A Stack is available at `http://example.com/stack/abc`. 
+This stack aggregates the content from services `foo` and `bar`.
+With the content of `foo` we want to link to another stack named `def`:
+
+```html
+<div>
+  <a href="$ROOT_URL/def">Go to other stack</a>
+</div>
+```
+
+To make sure the container service itself doesn't have to know about the actual location of Stacker (the `$ROOT_URL`) Stacker sends along a series of HTTP headers that tell the container service on which system it is running and which base URL to use.
+
+So all that needs to be done wither within a template is to call the helper function `create_stacker_link` to create a link:
+
+```html
+<div>
+    <a href="<%= stacker_link_url('another/stack/location') %>">Go to other location</a>
+</div>
+```
+
+This will output a fully qualifies URL incl. base URL and the path.
+
+Parameters can also be passed to the `create_stacker_link` function:
+
+```html
+<div>
+    <a href="<%= stacker_link_url('another/stack/location', 'aKey' => 'aValue', 'bKey' => 'bValue') %>">Go to other location</a>
+</div>
+```
+
+This will output a fully qualifies URL incl. the parameters passed, e.g.:
+
+```
+http://example.com/another/stack/location?=aValue&b=bValue
+```
+
+The output can also be combined with the standard Rails `link_to` tag:
+
+```html
+<div>
+    <%= link_to 'text', stacker_link_url('stack/abc') %>
+</div>
+```
+
 ### Other functionalities
 
 * [Lograge](https://github.com/roidrage/lograge) is automatically enabled
