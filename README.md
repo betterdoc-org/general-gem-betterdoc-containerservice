@@ -82,9 +82,9 @@ Otherwise (the default case) only the plain template will be rendered and return
 
 ### Helpers
 
-#### Link generation
+#### URL and link generation
 
-When the content of the container service is rendered inside a Stack (composed by Stacker) the following helper funtionality is available to create a link to another Stack with the same Stacker instance.
+When the content of the container service is rendered inside a Stack (composed by Stacker) the following helper functionality is available to create a link to another Stack with the same Stacker instance.
 
 Let's take an example:
 
@@ -104,7 +104,7 @@ So all that needs to be done wither within a template is to call the helper func
 
 ```html
 <div>
-    <a href="<%= create_stacker_link('another/stack/location') %>">Go to other location</a>
+    <a href="<%= stacker_link_url('another/stack/location') %>">Go to other location</a>
 </div>
 ```
 
@@ -114,7 +114,7 @@ Parameters can also be passed to the `create_stacker_link` function:
 
 ```html
 <div>
-    <a href="<%= create_stacker_link('another/stack/location', 'aKey' => 'aValue', 'bKey' => 'bValue') %>">Go to other location</a>
+    <a href="<%= stacker_link_url('another/stack/location', 'aKey' => 'aValue', 'bKey' => 'bValue') %>">Go to other location</a>
 </div>
 ```
 
@@ -122,6 +122,14 @@ This will output a fully qualifies URL incl. the parameters passed, e.g.:
 
 ```
 http://example.com/another/stack/location?=aValue&b=bValue
+```
+
+The output can also be combined with the standard Rails `link_to` tag:
+
+```html
+<div>
+    <%= link_to 'text', stacker_link_url('stack/abc') %>
+</div>
 ```
 
 ### Other functionalities
