@@ -23,7 +23,7 @@ module Betterdoc
         end
 
         def resolve_stacker_base_url_from_request
-          request.headers['HTTP_X-STACKER-ROOT-URL']
+          request.headers['HTTP_X_STACKER_ROOT_URL']
         end
 
         def resolve_stacker_base_url_from_environment

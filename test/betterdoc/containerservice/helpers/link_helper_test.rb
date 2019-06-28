@@ -6,7 +6,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with root url as header" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
@@ -19,7 +19,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with root url as header and parameters with special characters" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
@@ -32,7 +32,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with root url as header and parameters" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
@@ -45,7 +45,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with root url as header and parameters slash both in root URL and path" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com/')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com/')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
@@ -58,7 +58,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with root url as header and parameters no slash in root URL or path" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
@@ -111,7 +111,7 @@ class LinkHelperTest < ActiveSupport::TestCase
   test "stacker link url with default root url and parameters both in path and explicit" do
 
     mocked_request = Object.new
-    mocked_request.stubs('headers').returns('HTTP_X-STACKER-ROOT-URL' => 'http://stacker.example.com')
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
