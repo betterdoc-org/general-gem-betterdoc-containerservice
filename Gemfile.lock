@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/betterdoc-org/rails_db_guard
+  revision: 9d40305044aefe9141ac6d41dc5042af0a24b986
+  specs:
+    rails_db_guard (1.0.1)
+
 PATH
   remote: .
   specs:
@@ -166,6 +172,7 @@ DEPENDENCIES
   betterdoc-containerservice!
   minitest-ci (~> 3.4.0)
   mocha (~> 1.8.0)
+  rails_db_guard!
   rubocop (~> 0.68.1)
   rubocop-junit-formatter (~> 0.1.4)
   rubocop-performance (~> 1.2.0)
