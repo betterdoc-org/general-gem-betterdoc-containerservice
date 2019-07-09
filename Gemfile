@@ -12,3 +12,6 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+# Move this to gemspec when gem is released to rubygems
+gem "rails_db_guard", git: "https://github.com/betterdoc-org/rails_db_guard"
