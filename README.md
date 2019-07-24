@@ -132,6 +132,12 @@ The output can also be combined with the standard Rails `link_to` tag:
 </div>
 ```
 
+#### Stacker request flag
+ 
+When Stacker sends requests to a container service, a header, amongst others, is sent `HTTP_X_STACKER_ROOT_URL`. 
+A helper method `stacker_request?` exists in this repository that allows containers to check the flag if the actual request is sent from Stacker. 
+
+
 ### Other functionalities
 
 * [Lograge](https://github.com/roidrage/lograge) is automatically enabled
