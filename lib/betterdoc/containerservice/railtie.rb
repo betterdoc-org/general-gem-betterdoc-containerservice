@@ -44,6 +44,7 @@ module Betterdoc
         # Make sure that all our *helpers* are made available to the template evaluation engine
         class ActionView::Base
           include Betterdoc::Containerservice::Helpers::LinkHelper
+          include Betterdoc::Containerservice::Helpers::StackerHelper
         end
 
       end
