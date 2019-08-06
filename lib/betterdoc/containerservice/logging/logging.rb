@@ -15,18 +15,12 @@ Logging::Rails.configure do |config|
   # to the pattern layout. Color schemes should only be used with appenders
   # that write to STDOUT or STDERR; inserting terminal color codes into a file
   # is generally considered bad form.
-  Logging.color_scheme('bright',
-                       levels: {
-                         info: :green,
-                         warn: :yellow,
-                         error: :red,
-                         fatal: %i[white on_red]
-                       },
-                       date: :blue,
-                       logger: :cyan,
-                       message: :magenta)
-
-  Logging.appenders.stdout('stdout', auto_flushing: true, layout: Logging.layouts.pattern(pattern: pattern, color_scheme: 'bright'))
+  if ENV['LOGGING_COLOR'] == 'true'
+    Logging.color_scheme('bright', levels: { warn: :yellow, error: :red, fatal: %i[white on_red] }, date: :blue, logger: :cyan, message: :magenta)
+    Logging.appenders.stdout('stdout', auto_flushing: true, layout: Logging.layouts.pattern(pattern: pattern, color_scheme: 'bright'))
+  else
+    Logging.appenders.stdout('stdout', auto_flushing: true, layout: Logging.layouts.pattern(pattern: pattern))
+  end
 
   Logging.logger.root.level = config.log_level
   Logging.logger.root.appenders = 'stdout'
