@@ -41,6 +41,12 @@ module Betterdoc
             include Betterdoc::Containerservice::Controllers::Concerns::AuthenticationConcern
             include Betterdoc::Containerservice::Controllers::Concerns::StackerConcern
           end
+          class ActionController::API
+            include Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::HttpResponseMetadataConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::AuthenticationConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::StackerConcern
+          end
         end
 
         # Make sure that all our *helpers* are made available to the template evaluation engine
