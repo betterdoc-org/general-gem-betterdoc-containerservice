@@ -2,14 +2,12 @@ require "logging"
 require "logging-rails"
 require "lograge"
 
+# Make sure that all our classes are required
+Dir["#{File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))}/**/*.rb"].each { |f| require(f) }
+
 module Betterdoc
   module Containerservice
     class Railtie < Rails::Railtie
-
-      initializer 'betterdoc.containerservice.autoload', before: :set_autoload_paths do |app|
-        # Ensure that *all* the classes from the gem are visible throughout Rails
-        app.config.autoload_paths += Dir["#{File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))}/**/"]
-      end
 
       initializer 'betterdoc.containerservice.logging' do |app|
 
@@ -26,8 +24,9 @@ module Betterdoc
 
         # By default we don't want to have the SQL statements written in the logfiles as they might leak sensitive
         # information (like patient data, etc.)
-        ActiveRecord::Base.logger.level = Logger::INFO if defined?(ActiveRecord)
-
+        ActiveSupport.on_load(:active_record) do
+          ActiveRecord::Base.logger.level = Logger::INFO if defined?(ActiveRecord)
+        end
       end
 
       initializer 'betterdoc.containerservice.initialization' do
@@ -35,16 +34,20 @@ module Betterdoc
         # Make sure all our concerns are added to ActionController::Base
         # This way we ensure that all controllers require authentication via JWT, set the default headers expected
         # by Stacker and support some general functionality that makes our life a little easier
-        class ActionController::Base
-          include Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern
-          include Betterdoc::Containerservice::Controllers::Concerns::HttpResponseMetadataConcern
-          include Betterdoc::Containerservice::Controllers::Concerns::AuthenticationConcern
+        ActiveSupport.on_load(:action_controller) do
+          class ActionController::Base
+            include Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::HttpResponseMetadataConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::AuthenticationConcern
+            include Betterdoc::Containerservice::Controllers::Concerns::StackerConcern
+          end
         end
 
         # Make sure that all our *helpers* are made available to the template evaluation engine
-        class ActionView::Base
-          include Betterdoc::Containerservice::Helpers::LinkHelper
-          include Betterdoc::Containerservice::Helpers::StackerHelper
+        ActiveSupport.on_load(:action_view) do
+          class ActionView::Base
+            include Betterdoc::Containerservice::Helpers::LinkHelper
+          end
         end
 
       end
