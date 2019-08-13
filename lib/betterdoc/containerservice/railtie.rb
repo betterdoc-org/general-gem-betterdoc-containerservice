@@ -2,8 +2,7 @@ require "logging"
 require "logging-rails"
 require "lograge"
 
-# require_relative "../../refinements/logging"
-
+# Make sure that all our *helpers* are required
 Dir["#{File.expand_path(File.join(File.dirname(__FILE__), "..", ".."))}/**/*.rb"].each { |f| require(f) }
 
 module Betterdoc
