@@ -6,7 +6,7 @@ module Betterdoc
           extend ActiveSupport::Concern
 
           included do
-            helper_method :stacker_request?
+            helper_method :stacker_request? if respond_to?(:helper_method)
           end
 
           def stacker_request?

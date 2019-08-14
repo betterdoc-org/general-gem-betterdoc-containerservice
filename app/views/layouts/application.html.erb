@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= Rails.application.class.to_s.split("::").first %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://betterdoc-materialize.herokuapp.com/materialize/dist/css/betterdoc-materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700,800" />
+    <link rel="stylesheet" href="https://betterdoc-materialize.herokuapp.com/mdc/dist/css/betterdoc-mdc.css">
+  </head>
+
+  <body>
+    <%= yield %>
+
+    <script src="https://betterdoc-materialize.herokuapp.com/materialize/dist/js/betterdoc-materialize.min.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+     <script>
+        if (window.M) {
+          window.M.AutoInit();
+        }
+        if (window.mdc) {
+          window.mdc.autoInit();
+        }
+    </script>
+  </body>
+</html>

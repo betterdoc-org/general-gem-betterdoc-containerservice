@@ -61,9 +61,9 @@ The following code snippes demonstrate some shortcuts that can be used to render
 ```ruby
 def some_controller_method
   return render_containerservice_error(404, "Object not found") if object_not_found
-  
+
   # ...
-  
+
 end
 ```
 
@@ -77,8 +77,12 @@ end
 
 Renders the template specified under `:template_name`.
 
-Only if either the HTTP parameter `full_html` is set to `true` for the current request or an environment variable named `CONTAINERSERVICE_FULL_HTML` is set to `true` will the layout be applied to the template. 
+Only if either the HTTP parameter `full_html` is set to `true` for the current request or an environment variable named `CONTAINERSERVICE_FULL_HTML` is set to `true` will the layout be applied to the template.
 Otherwise (the default case) only the plain template will be rendered and returned to the client.
+
+### Layout
+
+Gem is written as Rails Engine and contains default layout (for development) at [app/views/layouts/application.html.erb](app/views/layouts/application.html.erb). This means that container should NOT have its own application layout. If you have one run `rm app/views/layouts/application.html.erb` to remove it. If you want to override default layout just add `app/views/layouts/application.html.erb` to your app :)
 
 ### Helpers
 
@@ -88,7 +92,7 @@ When the content of the container service is rendered inside a Stack (composed b
 
 Let's take an example:
 
-A Stack is available at `http://example.com/stack/abc`. 
+A Stack is available at `http://example.com/stack/abc`.
 This stack aggregates the content from services `foo` and `bar`.
 With the content of `foo` we want to link to another stack named `def`:
 
@@ -133,9 +137,9 @@ The output can also be combined with the standard Rails `link_to` tag:
 ```
 
 #### Stacker request flag
- 
-When Stacker sends requests to a container service, a header, amongst others, is sent `HTTP_X_STACKER_ROOT_URL`. 
-A helper method `stacker_request?` exists in this repository that allows containers to check the flag if the actual request is sent from Stacker. 
+
+When Stacker sends requests to a container service, a header, amongst others, is sent `HTTP_X_STACKER_ROOT_URL`.
+A helper method `stacker_request?` exists in this repository that allows containers to check the flag if the actual request is sent from Stacker.
 
 
 ### Other functionalities
