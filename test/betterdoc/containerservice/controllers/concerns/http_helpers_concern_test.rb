@@ -61,7 +61,7 @@ class HttpHelpersConcernTest < ActiveSupport::TestCase
   test "render containerservice action with full html from request" do
     concern = Object.new
     concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
-    concern.stubs(:params).returns({ full_html: "true" })
+    concern.stubs(:params).returns(full_html: "true")
     concern.expects(:render).with(:action_name, layout: true)
 
     concern.render_containerservice_action(:action_name)
