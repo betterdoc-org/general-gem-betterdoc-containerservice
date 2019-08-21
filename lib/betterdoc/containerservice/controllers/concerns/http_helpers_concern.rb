@@ -18,6 +18,10 @@ module Betterdoc
             render template: template_name, layout: compute_containerservice_full_html
           end
 
+          def render_containerservice_action(action_name)
+            render action_name, layout: compute_containerservice_full_html
+          end
+
           def compute_containerservice_full_html
             params[:full_html] == 'true' || ENV['CONTAINERSERVICE_FULL_HTML'] == 'true'
           end

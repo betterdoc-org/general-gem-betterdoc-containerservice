@@ -57,6 +57,7 @@ GEM
     arel (9.0.0)
     ast (2.4.0)
     builder (3.2.3)
+    climate_control (0.2.0)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     erubi (1.8.0)
@@ -167,6 +168,7 @@ PLATFORMS
 
 DEPENDENCIES
   betterdoc-containerservice!
+  climate_control (~> 0.2.0)
   minitest-ci (~> 3.4.0)
   mocha (~> 1.8.0)
   rubocop (~> 0.68.1)

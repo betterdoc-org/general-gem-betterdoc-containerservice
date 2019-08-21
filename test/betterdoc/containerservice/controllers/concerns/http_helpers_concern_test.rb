@@ -41,11 +41,40 @@ class HttpHelpersConcernTest < ActiveSupport::TestCase
 
     concern = Object.new
     concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
-    concern.stubs(:compute_containerservice_full_html).returns(true)
+    concern.stubs(:params).returns({})
     concern.expects(:render).with { |value| value[:template] == 'template' && value[:layout] == true }
 
-    concern.render_containerservice_template('template')
-
+    ClimateControl.modify CONTAINERSERVICE_FULL_HTML: "true" do
+      concern.render_containerservice_template('template')
+    end
   end
 
+  test "render containerservice action" do
+    concern = Object.new
+    concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
+    concern.stubs(:params).returns({})
+    concern.expects(:render).with(:action_name, layout: false)
+
+    concern.render_containerservice_action(:action_name)
+  end
+
+  test "render containerservice action with full html from request" do
+    concern = Object.new
+    concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
+    concern.stubs(:params).returns({ full_html: "true" })
+    concern.expects(:render).with(:action_name, layout: true)
+
+    concern.render_containerservice_action(:action_name)
+  end
+
+  test "render containerservice action with full html from environment" do
+    concern = Object.new
+    concern.extend(Betterdoc::Containerservice::Controllers::Concerns::HttpHelpersConcern)
+    concern.stubs(:params).returns({})
+    concern.expects(:render).with(:action_name, layout: true)
+
+    ClimateControl.modify CONTAINERSERVICE_FULL_HTML: "true" do
+      concern.render_containerservice_action(:action_name)
+    end
+  end
 end
