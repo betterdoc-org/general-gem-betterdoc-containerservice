@@ -1,0 +1,72 @@
+DID_RECEIVE_LEAD:
+  phase: 'Admission'
+  label: 'Lead erstellt'
+DID_ADMIT:
+  phase: 'Anamnesis'
+  label: 'Anfrage aufgenommen'
+DID_SEND_ANAMNESIS_SURVEY:
+  phase: 'Anamnesis'
+  label: 'Anamnese-Fragebogen versendet'
+DID_RECEIVE_PARTIAL_ANAMNESIS_SURVEY:
+  phase: 'Anamnesis'
+  label: 'Anamnese-Fragebogen teilweise erhalten'
+DID_RECEIVE_FULL_ANAMNESIS_SURVEY:
+  phase: 'Matching'
+  label: 'Anamnese-Fragebogen vollständig erhalten'
+DID_ACCEPT_ANAMNESIS:
+  phase: 'Matching'
+  label: 'We received the full survey and have all the information we need TODO'
+DID_START_RESEARCH:
+  phase: 'Matching'
+  label: '(Re-)Recherche begonnen'
+DID_PERFORM_DATABASE_RESEARCH:
+  phase: 'Matching'
+  label: 'Datenbank-Recherche begonnen'
+DID_PERFORM_PRE_RESEARCH:
+  phase: 'Matching'
+  label: 'Fall vorrecherchiert'
+DID_INVOLVE_EXPERTS:
+  phase: 'Matching'
+  label: 'Spezialistenumfrage gestartet'
+DID_START_RERUN:
+  phase: 'Matching'
+  label: 'Rerun gestartet'
+DID_SEND_PRE_RESULTS:
+  phase: 'Matching'
+  label: 'Vorschläge der Vorrecherche versendet'
+DID_COMMUNICATE_RESULT:
+  phase: 'Follow-Up'
+  label: 'Vorschläge der Recherche versendet'
+DID_SEND_FINAL_RESULTS:
+  phase: 'Follow-Up'
+  label: 'Finale Vorschläge der Recherche versendet'
+DID_RECEIVE_RESULT_REJECTION:
+  phase: 'Matching'
+  label: 'Patient hat Vorschläge abgelehnt'
+DID_SCHEDULE_TVB:
+  phase: 'Follow-Up'
+  label: 'Terminvereinbarung (TVB) stattgefunden'
+DID_COMPLETE_MED_CALL:
+  phase: ''
+  label: 'Ein medizinisches Telefonat hat stattgefunden (siehe nächstes Ereignis)'
+DID_COMPLETE_FIRST_MEDICAL_CALL:
+  phase: ''
+  label: 'Erstes medizinisches Telefonat hat stattgefunden'
+DID_POSTPONE_FIRST_MEDICAL_CALL:
+  phase: ''
+  label: 'Erstes medizinisches Telefonat wurde verschoben'
+DID_COMPLETE_SECOND_MEDICAL_CALL:
+  phase: ''
+  label: 'Telefonat zur Besprechung der Vorschläge hat stattgefunden'
+DID_COMPLETE_RESULT_CALL:
+  phase: 'Matching'
+  label: 'Telefonat zur Besprechung der Vorschläge hate stattgefunden'
+DID_REJECT_CASE:
+  phase: 'Archive'
+  label: 'Anfrage abgelehnt'
+DID_CLOSE:
+  phase: 'Archive'
+  label: 'Anfrage beendet'
+DID_ABORT:
+  phase: 'Archive'
+  label: 'Anfrage abgebrochen'
