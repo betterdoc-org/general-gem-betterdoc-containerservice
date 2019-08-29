@@ -5,13 +5,13 @@ module Betterdoc
         extend ActiveSupport::Concern
 
         def get_formatted_datetime(date)
-          return 'N/A' if date.nil? || date == 'N/A'
+          return 'Datum nicht verfügbar' if date.nil? || date == 'N/A'
 
           Time.parse(date).strftime('%d.%m.%Y %H:%M')
         end
 
         def get_formatted_date(date)
-          return 'N/A' if date.nil? || date == 'N/A'
+          return 'Datum nicht verfügbar' if date.nil? || date == 'N/A'
 
           Time.parse(date).strftime('%d.%m.%Y')
         end
