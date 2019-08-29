@@ -53,6 +53,7 @@ module Betterdoc
         ActiveSupport.on_load(:action_view) do
           class ActionView::Base
             include Betterdoc::Containerservice::Helpers::LinkHelper
+            include Betterdoc::Containerservice::Helpers::DateHelper
           end
         end
 
