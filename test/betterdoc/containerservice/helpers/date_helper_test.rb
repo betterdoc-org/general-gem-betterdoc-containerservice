@@ -5,8 +5,8 @@ class DateHelperTest < ActiveSupport::TestCase
   include Betterdoc::Containerservice::Helpers::DateHelper
 
   test "properly formats dates and datetime" do
-    assert_equal get_formatted_datetime(nil), 'N/A'
-    assert_equal get_formatted_date(nil), 'N/A'
+    assert_equal get_formatted_datetime(nil), 'Datum nicht verfügbar'
+    assert_equal get_formatted_date(nil), 'Datum nicht verfügbar'
     assert_equal get_formatted_datetime('2019-08-12T15:52:55+02:00'), '12.08.2019 15:52'
     assert_equal get_formatted_date('2019-08-12T15:52:55+02:00'), '12.08.2019'
   end
