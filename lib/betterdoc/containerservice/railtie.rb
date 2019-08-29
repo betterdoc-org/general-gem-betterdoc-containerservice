@@ -54,7 +54,6 @@ module Betterdoc
           class ActionView::Base
             include Betterdoc::Containerservice::Helpers::LinkHelper
             include Betterdoc::Containerservice::Helpers::DateHelper
-            include Betterdoc::Containerservice::Helpers::EventLabelHelper
           end
         end
 
