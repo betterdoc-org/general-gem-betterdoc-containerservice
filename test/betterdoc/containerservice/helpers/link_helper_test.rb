@@ -149,4 +149,17 @@ class LinkHelperTest < ActiveSupport::TestCase
 
   end
 
+  test "returns betterdoc-mdc css asset url" do
+
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal 'http://stacker.example.com/css/betterdoc-mdc.css', concern.stacker_betterdoc_css_asset_url
+
+  end
+
 end

@@ -16,6 +16,10 @@ module Betterdoc
           result_url
         end
 
+        def stacker_betterdoc_css_asset_url
+          stacker_link_url('/css/betterdoc-mdc.css')
+        end
+
         private
 
         def resolve_stacker_base_url
