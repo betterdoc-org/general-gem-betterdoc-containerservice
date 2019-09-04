@@ -156,6 +156,7 @@ class LinkHelperTest < ActiveSupport::TestCase
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
+    concern.stubs(:working_in_production_system?).returns(true)
     concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
 
     assert_equal 'http://stacker.example.com/css/betterdoc-mdc.css', concern.stacker_betterdoc_css_asset_url
@@ -166,10 +167,10 @@ class LinkHelperTest < ActiveSupport::TestCase
 
     mocked_request = Object.new
     mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => '')
-    mocked_request.stubs('stacker_link_url').returns('/')
 
     concern = Object.new
     concern.stubs(:request).returns(mocked_request)
+    concern.stubs(:working_in_production_system?).returns(false)
     concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
 
     assert_equal 'https://parc-staging.betterdoc.org/css/betterdoc-mdc.css', concern.stacker_betterdoc_css_asset_url
