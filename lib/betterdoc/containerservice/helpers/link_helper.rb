@@ -37,7 +37,7 @@ module Betterdoc
         end
 
         def working_in_production_system?
-          Rail.env.production?
+          Rails.env.production?
         end
 
       end
