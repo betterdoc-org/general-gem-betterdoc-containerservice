@@ -17,7 +17,10 @@ module Betterdoc
         end
 
         def stacker_betterdoc_css_asset_url
-          stacker_link_url('/css/betterdoc-mdc.css')
+          asset_url = stacker_link_url('/css/betterdoc-mdc.css')
+          return asset_url if asset_url.start_with?('http')
+
+          'https://parc-staging.betterdoc.org/css/betterdoc-mdc.css'
         end
 
         private

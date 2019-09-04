@@ -162,4 +162,18 @@ class LinkHelperTest < ActiveSupport::TestCase
 
   end
 
+  test "returns default betterdoc-mdc css asset url in dev enviroment" do
+
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => '')
+    mocked_request.stubs('stacker_link_url').returns('/')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal 'https://parc-staging.betterdoc.org/css/betterdoc-mdc.css', concern.stacker_betterdoc_css_asset_url
+
+  end
+
 end
