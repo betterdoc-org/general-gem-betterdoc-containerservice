@@ -16,12 +16,6 @@ module Betterdoc
           result_url
         end
 
-        def stacker_betterdoc_css_asset_url
-          return stacker_link_url('/css/betterdoc-mdc.css') if working_in_production_system?
-
-          'https://parc-staging.betterdoc.org/css/betterdoc-mdc.css'
-        end
-
         private
 
         def resolve_stacker_base_url
@@ -34,10 +28,6 @@ module Betterdoc
 
         def resolve_stacker_base_url_from_environment
           ENV['STACKER_ROOT_URL']
-        end
-
-        def working_in_production_system?
-          Rails.env.production?
         end
 
       end
