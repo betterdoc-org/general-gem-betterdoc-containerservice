@@ -9,23 +9,25 @@ module Betterdoc
   module Containerservice
     class Railtie < Rails::Railtie
 
-      initializer 'betterdoc.containerservice.logging' do |app|
+      unless ENV["LOG_SENSITIVE_DATA"]
+        initializer 'betterdoc.containerservice.logging' do |app|
 
-        # Lograge cleans up the default Rails logging.
-        # The main feature that we use it *not* printing all the HTTP parametes to the Logger (and to the console)
-        # so that any passwords or other sensitive data isn't leaked into our logs (and the log aggregator).
-        # For more details visit: https://github.com/roidrage/lograge
-        app.config.lograge.enabled = true
+          # Lograge cleans up the default Rails logging.
+          # The main feature that we use it *not* printing all the HTTP parametes to the Logger (and to the console)
+          # so that any passwords or other sensitive data isn't leaked into our logs (and the log aggregator).
+          # For more details visit: https://github.com/roidrage/lograge
+          app.config.lograge.enabled = true
 
-        # Our logging pattern includes the "request_id" passed either via an HTTP header or generated internally.
-        # By default the Logging MDC doesn't contain the "request_id" so we have to introduce a new middleware into
-        # the Rack stack that reads the "request_id" and makes it availble to the Logging MDC
-        app.config.middleware.insert_after ActionDispatch::RequestId, Betterdoc::Containerservice::Logging::StoreRequestIdIntoLoggingMdcMiddleware
+          # Our logging pattern includes the "request_id" passed either via an HTTP header or generated internally.
+          # By default the Logging MDC doesn't contain the "request_id" so we have to introduce a new middleware into
+          # the Rack stack that reads the "request_id" and makes it availble to the Logging MDC
+          app.config.middleware.insert_after ActionDispatch::RequestId, Betterdoc::Containerservice::Logging::StoreRequestIdIntoLoggingMdcMiddleware
 
-        # By default we don't want to have the SQL statements written in the logfiles as they might leak sensitive
-        # information (like patient data, etc.)
-        ActiveSupport.on_load(:active_record) do
-          ActiveRecord::Base.logger.level = Logger::INFO if defined?(ActiveRecord)
+          # By default we don't want to have the SQL statements written in the logfiles as they might leak sensitive
+          # information (like patient data, etc.)
+          ActiveSupport.on_load(:active_record) do
+            ActiveRecord::Base.logger.level = Logger::INFO if defined?(ActiveRecord)
+          end
         end
       end
 
