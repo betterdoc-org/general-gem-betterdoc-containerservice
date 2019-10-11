@@ -56,6 +56,14 @@ module Betterdoc
           end
         end
 
+        # Make sure that external APIs can be initialized here before application starts
+        ActiveSupport.on_load(:before_initialize) do
+          if ENV['MONITOR_INSTRUMENTAL_API_KEY'].present?
+            require 'instrumental_agent'
+            @instrumental_agent ||= Instrumental::Agent.new(ENV['MONITOR_INSTRUMENTAL_API_KEY'])
+          end
+        end
+
       end
 
     end
