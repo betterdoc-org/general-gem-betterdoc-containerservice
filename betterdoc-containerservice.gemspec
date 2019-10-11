@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
+  spec.add_dependency 'instrumental_agent', '~> 2.1.0'
   spec.add_dependency 'jwt', '~> 2.1.0'
   spec.add_dependency 'logging', '~> 2.2.2'
   spec.add_dependency 'logging-rails', '~> 0.6.0'
