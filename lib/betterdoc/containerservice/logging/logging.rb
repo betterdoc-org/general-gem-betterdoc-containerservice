@@ -23,7 +23,7 @@ Logging::Rails.configure do |config|
   end
 
   Logging.logger.root.level = config.log_level
-  Logging.logger.root.appenders = 'stdout'
+  Logging.logger.root.appenders = 'stdout' unless Rails.env.test?
 
   # Under Phusion Passenger smart spawning, we need to reopen all IO streams
   # after workers have forked.
