@@ -1,4 +1,8 @@
-# Betterdoc::Containerservice
+**THIS REPOSITORY IS OUTDATED AND SHOULD NO LONGER BE USED! IT WILL BE REMOVED ONCE ALL DEPENDENCIES HAVE BEEN ADJUSTED**
+
+Our containerserivce Gem has moved to https://github.com/betterdoc-org/infrastructure-gem-containerservice. 
+
+---
 
 This gem is designed to encapsulate all the common functionality needed within our cointainer services (e.g. authentication and special log handling).
 
