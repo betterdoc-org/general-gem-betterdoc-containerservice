@@ -9,8 +9,13 @@ module Betterdoc
         include ActionView::Helpers::UrlHelper
 
         def link_to_stack(content, stack, url_options = {}, html_options = {}, &block)
-          html_options, url_options, stack, content = url_options, stack, content, block if block_given?
-          stack_url = ["/stack/#{stack}", url_options.to_query.presence].compact.join("?") 
+          if block_given?
+            html_options = url_options
+            url_options = stack
+            stack = content
+            content = block
+          end
+          stack_url = ["/stack/#{stack}", url_options.to_query.presence].compact.join("?")
           html_options[:data] ||= {}
           html_options[:data][:stacker_no_hijack] = "true"
           if block_given?
