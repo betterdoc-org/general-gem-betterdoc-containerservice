@@ -183,9 +183,9 @@ class LinkHelperTest < ActionView::TestCase
 
   test "link_to_stack can handle block with html" do
     assert_dom_equal(
-      '<a data-stacker-no-hijack="true" data-foo-bar="fiz-baz" href="/stack/some-stack"><div class="fancy-mdc">icon</div>"Go to some stack</a>',
+      '<a data-stacker-no-hijack="true" data-foo-bar="fiz-baz" href="/stack/some-stack"><div class="fancy-mdc">icon</div>Go to some stack</a>',
       link_to_stack("some-stack", {}, data: { foo_bar: "fiz-baz" }) do
-        content_tag(:div, "icon", class: "fany-mdc") + 
+        content_tag(:div, "icon", class: "fancy-mdc") + 
         "Go to some stack"
       end
     )
