@@ -1,10 +1,19 @@
 require 'cgi'
+require 'action_view/helpers'
 
 module Betterdoc
   module Containerservice
     module Helpers
       module LinkHelper
         extend ActiveSupport::Concern
+        include ActionView::Helpers::UrlHelper
+
+        def link_to_stack(content, stack, url_options = {}, html_options = {})
+          stack_url = stacker_link_url("stacks/#{stack}", url_options)
+          html_options[:data] ||= {}
+          html_options[:data][:stacker_no_hijack] = "true"
+          link_to(content, stack_url, html_options)
+        end
 
         def stacker_link_url(target_path, parameters = {})
           result_url = resolve_stacker_base_url.dup

@@ -1,7 +1,8 @@
 require 'test_helper'
+require 'action_view'
 require 'betterdoc/containerservice/helpers/link_helper'
 
-class LinkHelperTest < ActiveSupport::TestCase
+class LinkHelperTest < ActionView::TestCase
 
   test "stacker link url with root url as header" do
 
@@ -147,6 +148,48 @@ class LinkHelperTest < ActiveSupport::TestCase
 
     assert_equal 'http://stacker.example.com/stacks/abc?x=y&aKey=aValue&bKey=bValue', concern.stacker_link_url('stacks/abc?x=y', 'aKey' => 'aValue', 'bKey' => 'bValue')
 
+  end
+
+  test "link_to_stack generates link to stack on stacker" do
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal(
+      '<a data-stacker-no-hijack="true" href="/stack/some-stack">Go to some stack</a>',
+      concern.link_to_stack("Go to some stack", "some-stack")
+    )
+  end
+
+  test "link_to_stack generates link with params if they are provided" do
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal(
+      '<a data-stacker-no-hijack="true" href="/stack/some-stack?fiz=baz&foo=bar">Go to some stack</a>',
+      concern.link_to_stack("Go to some stack", "some-stack", foo: :bar, fiz: "baz")
+    )
+  end
+
+  test "link_to_stack generates link without loosing data attributes" do
+    mocked_request = Object.new
+    mocked_request.stubs('headers').returns('HTTP_X_STACKER_ROOT_URL' => 'http://stacker.example.com')
+
+    concern = Object.new
+    concern.stubs(:request).returns(mocked_request)
+    concern.extend(Betterdoc::Containerservice::Helpers::LinkHelper)
+
+    assert_equal(
+      '<a data-stacker-no-hijack="true" data-foo-bar="fiz-baz" href="/stack/some-stack">Go to some stack</a>',
+      concern.link_to_stack("Go to some stack", "some-stack", {}, data: { foo_bar: "fiz-baz" })
+    )
   end
 
 end
