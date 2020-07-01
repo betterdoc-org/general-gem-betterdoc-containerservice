@@ -8,8 +8,15 @@ module Betterdoc
         extend ActiveSupport::Concern
         include ActionView::Helpers::UrlHelper
 
-        def link_to_stack(content, stack, url_options = {}, html_options = {})
-          stack_url = stacker_link_url("stacks/#{stack}", url_options)
+        # link_to_stack("some-stack", {}, data: { foo_bar: "fiz-baz" }) do ...
+        # link_to_stack(content -> stack, stack -> url_options, url_options -> html_options) do content
+
+        # link_to_stack("Go to some stack", "some-stack", {}, data: { foo_bar: "fiz-baz" })
+        # link_to_stack(content, stack, url_options, html_options)
+
+        def link_to_stack(content, stack, url_options = {}, html_options = {}, &block)
+          html_options, url_options, stack, content = url_options, stack, content, block if block_given?
+          stack_url = ["/stack/#{stack}", url_options.to_query.presence].compact.join("?") 
           html_options[:data] ||= {}
           html_options[:data][:stacker_no_hijack] = "true"
           link_to(content, stack_url, html_options)
