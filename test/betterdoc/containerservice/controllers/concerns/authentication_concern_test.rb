@@ -1,3 +1,4 @@
+require 'active_support/core_ext/numeric/time'
 require 'test_helper'
 require 'openssl'
 require 'betterdoc/containerservice/controllers/concerns/authentication_concern'
